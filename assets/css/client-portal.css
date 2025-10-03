@@ -1,0 +1,192 @@
+
+:root {
+    --max: 1200px;
+    --card: #ffffff;
+    --radius: 12px;
+    --accent: #2563eb;
+    --muted: #6b7280;
+}
+* { box-sizing: border-box; font-family: Inter, ui-sans-serif, system-ui, Arial, Helvetica; }
+.cp-wrapper { width: 100%; max-width: var(--max); margin: 0 auto; padding: 20px; }
+.cp-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.cp-header h1 { margin: 0; font-size: 20px; }
+.cp-card { background: var(--card); border-radius: var(--radius); padding: 18px; box-shadow: 0 6px 18px rgba(16,24,40,0.06); margin-bottom: 18px; }
+.cp-grid { display: grid; grid-template-columns: 260px 1fr; gap: 18px; }
+.cp-nav { position: sticky; top: 28px; }
+.cp-menu { display: flex; flex-direction: column; gap: 8px; }
+.cp-tab-btn { display: block; text-align: left; padding: 10px 12px; border-radius: 10px; color: var(--muted); cursor: pointer; border: 1px solid transparent; background: transparent; width: 100%; }
+.cp-tab-btn.active { background: linear-gradient(90deg, #eef6ff, #f7fbff); color: var(--accent); border-color: #e9f1ff; font-weight: 600; }
+.cp-profile-head { display: flex; gap: 12px; align-items: center; }
+.cp-avatar { width: 56px; height: 56px; border-radius: 50%; background: #eef2ff; display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: 700; font-size: 24px; }
+.cp-form-row { display: flex; gap: 12px; margin-bottom: 10px; }
+.cp-input, .cp-textarea, .cp-select { padding: 10px; border-radius: 8px; border: 1px solid #e7e9ee; width: 100%; font-size: 14px; }
+.cp-textarea { min-height: 100px; resize: vertical; }
+.cp-btn { background: var(--accent); color: #fff; padding: 10px 12px; border-radius: 8px; border: 0; cursor: pointer; }
+.cp-btn:hover { opacity: 0.9; }
+.cp-btn-ghost { background: transparent; color: var(--accent); border: 1px solid #e8f0ff; }
+.cp-small { font-size: 13px; color: var(--muted); }
+.cp-list { display: flex; flex-direction: column; gap: 10px; }
+.cp-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.cp-chip { padding: 6px 8px; border-radius: 999px; border: 1px solid #eef3ff; background: #f9fbff; font-size: 13px; }
+.cp-view { display: none; }
+.cp-view.active { display: block; }
+.cp-loading { text-align: center; padding: 40px; color: var(--muted); }
+hr { margin: 14px 0; border: none; height: 1px; background: #f0f2f6; }
+
+@media (max-width: 820px) {
+    .cp-grid { grid-template-columns: 1fr; }
+    .cp-nav { position: relative; }
+    .cp-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .cp-form-row { flex-direction: column; }
+}
+
+/* Mobile Drawer (phones only) */
+@media (max-width: 640px) {
+    .cp-mobile-menu { display: inline-block !important; background: var(--accent); color: #fff; border: 0; padding: 10px 12px; border-radius: 10px; cursor: pointer; }
+    .cp-header h1 { display: inline-block; margin-left: 6px; vertical-align: middle; font-size: 18px; }
+
+    .cp-nav { position: fixed; top: 0; left: 0; height: 100%; width: 260px; z-index: 1001; transform: translateX(-100%); transition: transform 0.25s ease; }
+    .cp-nav .cp-card { height: 100%; border-radius: 0; box-shadow: none; }
+    .cp-nav.open { transform: translateX(0); }
+
+    .cp-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; }
+}
+
+/* Modal Styles */
+.cp-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center; }
+.cp-modal-content { background: white; border-radius: 12px; max-width: 500px; width: 90%; max-height: 90%; overflow-y: auto; }
+.cp-modal-large { max-width: 800px; }
+.cp-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #e7e9ee; }
+.cp-modal-header h3 { margin: 0; }
+.cp-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted); }
+.cp-modal-close:hover { color: #000; }
+.cp-modal-content form { padding: 20px; }
+.cp-modal-footer { display: flex; justify-content: flex-end; gap: 12px; padding: 20px; border-top: 1px solid #e7e9ee; }
+
+/* Invoice Status Colors */
+.cp-status-unpaid { background: #fef3c7; color: #92400e; }
+.cp-status-paid { background: #d1fae5; color: #065f46; }
+.cp-status-overdue { background: #fee2e2; color: #991b1b; }
+.cp-status-cancelled { background: #f3f4f6; color: #374151; }
+
+/* File Upload Area */
+.cp-file-upload { border: 2px dashed #d1d5db; border-radius: 8px; padding: 20px; text-align: center; margin: 12px 0; }
+.cp-file-upload:hover { border-color: var(--accent); background: #f8fafc; }
+.cp-file-upload.dragover { border-color: var(--accent); background: #eff6ff; }
+
+/* Payment History */
+.cp-payment-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9fafb; border-radius: 6px; margin-bottom: 8px; }
+.cp-payment-method { font-weight: 600; color: var(--accent); }
+.cp-payment-amount { font-weight: 700; color: #059669; }
+
+
+/* ✅ Extra Mobile Enhancements – keep existing code unchanged */
+@media (max-width: 640px) {
+    /* Header: clean mobile layout */
+    .cp-header { gap: 8px; }
+    .cp-header > div:first-child { display: flex; align-items: center; gap: 10px; }
+    .cp-header .cp-small { display: none; }
+    .cp-header > div:last-child { width: 100%; display: flex; justify-content: flex-end; }
+    .cp-header .cp-btn { min-height: 40px; }
+    /* Hide header Logout on phones; show drawer logout */
+    .cp-header > div:last-child .cp-btn { display: none; }
+    .cp-logout-mobile-only { display: block !important; color: var(--muted); }
+
+    /* Make main wrapper padding smaller on phones */
+    .cp-wrapper { padding: 12px; }
+
+    /* Ensure form inputs and buttons fill width nicely */
+    .cp-input,
+    .cp-textarea,
+    .cp-select,
+    .cp-btn {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Space between stacked elements */
+    .cp-form-row {
+        gap: 8px;
+    }
+
+    /* Make modals fill more of the screen on small devices */
+    .cp-modal-content {
+        width: 95%;
+        max-width: 95%;
+        margin: 0 2.5%;
+        border-radius: 10px;
+    }
+
+    /* Large modal also fits mobile screen */
+    .cp-modal-large {
+        max-width: 95%;
+    }
+
+    /* Ensure toolbar/filter rows wrap cleanly */
+    #invoices > div[style*="gap"],
+    #documents > div[style*="gap"] {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* Stack generic row layouts on small screens */
+    .cp-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .cp-list .cp-row > * {
+        width: 100%;
+    }
+
+    /* Documents: ensure toolbar and items don't overflow on 320px */
+    #documents input[type="file"] {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #docList .cp-row > div:last-child {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    #docList .cp-row > div:last-child .cp-btn {
+        width: 100%;
+    }
+
+    #docList .cp-small {
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+
+    /* Modal actions: full-width buttons, stacked */
+    .cp-modal-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cp-modal-footer .cp-btn {
+        width: 100%;
+    }
+
+    /* Invoices header: stack title and Create button on phones */
+    #invoices > div:first-of-type {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    #invoices > div:first-of-type .cp-btn {
+        width: 100%;
+    }
+}
+
+/* Optional – slightly larger break for tablets in portrait */
+@media (max-width: 768px) {
+    /* Let invoice filters stack nicely on small tablets */
+    #invoices > div[style*="gap"] {
+        flex-wrap: wrap;
+    }
+}
